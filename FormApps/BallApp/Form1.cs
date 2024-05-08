@@ -20,19 +20,23 @@ namespace BallApp {
             pb.Location = new Point((int)soccerBall.PosX, (int)soccerBall.PosY);
         }
 
-        private void Form1_MouseClick(object sender, MouseEventArgs e) {
-
+        private void Form1_MouseClick(object sender, MouseEventArgs e ) {
             pb = new PictureBox();   // 画像を表示するコントロール
-            pb.Size = new Size(50,50);
+            pb.Size = new Size(50, 50);
 
-            soccerBall = new SoccerBall(e.X, e.Y);
 
-            pb.Image =soccerBall.Image;
-            pb.Location = new Point((int)soccerBall.PosX,(int)soccerBall.PosY);
-            pb.SizeMode = PictureBoxSizeMode.StretchImage;
-            pb.Parent = this;
 
-            timer1.Start();
+            if (e.Button == MouseButtons.Left) {
+                soccerBall = new SoccerBall(e.X, e.Y);
+
+                pb.Image = soccerBall.Image;
+                pb.Location = new Point((int)soccerBall.PosX, (int)soccerBall.PosY);
+                pb.SizeMode = PictureBoxSizeMode.StretchImage;
+                pb.Parent = this;
+
+                timer1.Start();
+            }
+
 
         }
     }
