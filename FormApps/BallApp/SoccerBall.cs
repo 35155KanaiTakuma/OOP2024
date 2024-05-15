@@ -19,7 +19,7 @@ namespace BallApp {
                 MoveX = -MoveX;
             }
 
-            if(PosY > 500 || PosY < 0) {
+            if (PosY > 500 || PosY < 0) {
                 MoveY = -MoveY;
             }
             PosX += MoveX;

@@ -8,7 +8,7 @@ namespace BallApp {
     internal class TennisBall : Obj {
 
         public TennisBall(double xp, double yp)
-            : base(xp, yp, @"Picture\tennis_ball.png") {
+            : base(xp, yp,@"Picture\tennis_ball.png"){
 
             MoveX = 10; // Xの移動量
             MoveY = 10; // Yの移動量
