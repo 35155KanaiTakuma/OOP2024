@@ -52,9 +52,9 @@ namespace Exercise02 {
         }
 
         private static void Exercise2_3(List<string> names) {
-            var query = names.Where(s => s.Contains('o'));
-            foreach (var s in query) {
-                Console.WriteLine(s);
+            var query = names.Where(s => s.Contains('o')).ToArray();
+            foreach (var name in query) {
+                Console.WriteLine(name);
             }
         }
 
