@@ -59,7 +59,12 @@ namespace Exercise02 {
         }
 
         private static void Exercise2_4(List<string> names) {
-
+            var select = names.Where(s => s.StartsWith("B"))
+                              .Select(s=>new { s.Length ,s});
+            foreach (var obj in select)
+            {
+                Console.WriteLine(obj.s + "," + obj.Length);
+            }
         }
     }
 }
