@@ -16,17 +16,17 @@ namespace Exercise02 {
             Exercise2_1(names);
             Console.WriteLine();
 
-            Console.WriteLine("***** 3.2.1 *****");
+            Console.WriteLine("***** 3.2.2 *****");
             Exercise2_2(names);
             Console.WriteLine();
 
-            Console.WriteLine("***** 3.2.1 *****");
+            Console.WriteLine("***** 3.2.3 *****");
             Exercise2_3(names);
-            Console.WriteLine("***** 3.2.1 *****");
-
-            Console.WriteLine("***** 3.2.1 *****");
             Console.WriteLine();
+
+            Console.WriteLine("***** 3.2.4 *****");
             Exercise2_4(names);
+            Console.WriteLine();
         }
 
         private static void Exercise2_1(List<string> names) {
@@ -40,22 +40,26 @@ namespace Exercise02 {
                 if (string.IsNullOrEmpty(line))
                     break;  // 空行だったら抜ける
 
-                int index = names.FindIndex(s => s == line );
+                int index = names.FindIndex(s => s == line);
                 Console.WriteLine(index);
-            }while(true);
+            } while (true);
 
         }
 
         private static void Exercise2_2(List<string> names) {
-        names.Count();
+            var count = names.Count(s => s.Contains('o'));
+            Console.WriteLine(count);
         }
 
         private static void Exercise2_3(List<string> names) {
-        
+            var query = names.Where(s => s.Contains('o'));
+            foreach (var s in query) {
+                Console.WriteLine(s);
+            }
         }
 
         private static void Exercise2_4(List<string> names) {
-         
+
         }
     }
 }
