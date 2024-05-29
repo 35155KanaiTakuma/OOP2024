@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Versioning;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -27,16 +28,25 @@ namespace Section01 {
 
             Console.WriteLine("整数を入力:");
             string inputNum = Console.ReadLine();
-            int num;
-            //int num =int.Parse(inputNum);
-            //Console.WriteLine("整数に変換した値:", num);
 
-            if(int.TryParse(inputNum,out num)) {
-                Console.WriteLine("変換できた:" + num );
+            try {
+                int num = int.Parse(inputNum);
             }
-            else {
-                Console.WriteLine("変換できなかった");
+            catch (FormatException ex) {
+                Console.WriteLine("FormatException" + ex.Message);
+                
             }
+            catch(ArgumentException ex) {
+                Console.WriteLine("ArgumentException" + ex.Message);
+            }
+
+            catch(OverflowException ex) {
+
+            }
+            finally {
+                Console.WriteLine("処理が終了しました");
+            }
+
         }
 
         private static object GetMessage(string code) {
