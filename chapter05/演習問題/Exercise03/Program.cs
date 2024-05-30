@@ -23,12 +23,15 @@ namespace Exercise03 {
             Console.WriteLine("-----");
 
             Exercise3_5(text);
+            Console.WriteLine("-----"); 
+
+            Exercise3_6(text);
         }
 
         private static void Exercise3_1(string text) {
             //var cnt = text.Count(s => s == "");
             var cnt = text.Count(c => c == ' ');
-            Console.WriteLine("空白数:{0}",cnt);
+            Console.WriteLine("空白数:{0}", cnt);
         }
 
         private static void Exercise3_2(string text) {
@@ -45,7 +48,7 @@ namespace Exercise03 {
 
         private static void Exercise3_4(string text) {
             var words = text.Split(' ').Where(s => s.Length <= 4);
-            foreach (var word in words) { 
+            foreach (var word in words) {
                 Console.WriteLine(word);
             }
         }
@@ -65,6 +68,22 @@ namespace Exercise03 {
                 sb.Append(' ');
             }
             Console.WriteLine(sb);
+            /*if (array.Length > 0) {
+                var array = text.Split(' ').ToArray();
+                var sb = new StringBuilder(array[0]);
+                foreach (var word in array.Skip(1)) {     補足説明
+                    sb.Append(' ');
+                    sb.Append(word);
+                } 
+            Console.WriteLine(sb);
+        }*/
+        }
+        private static void Exercise3_6(string text) {
+            var array = text.Split(new[] { ' ', ',', '-', '_' }).ToArray();
+            foreach (var word in array) {
+                Console.WriteLine(word);
+            }
         }
     }
 }
+
