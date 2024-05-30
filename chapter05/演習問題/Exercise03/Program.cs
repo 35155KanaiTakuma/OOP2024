@@ -37,16 +37,34 @@ namespace Exercise03 {
         }
 
         private static void Exercise3_3(string text) {
-            var cnt = text.Count(c => c != ' ');
-            Console.WriteLine("単語数:{0}",cnt);
+            //var cnt = text.Count(c => c != ' ');
+            //Console.WriteLine("単語数:{0}",cnt);
+            int cnt = text.Split(' ').Length;
+            Console.WriteLine("単語数:{0}", cnt);
         }
 
         private static void Exercise3_4(string text) {
-            
+            var words = text.Split(' ').Where(s => s.Length <= 4);
+            foreach (var word in words) { 
+                Console.WriteLine(word);
+            }
         }
 
         private static void Exercise3_5(string text) {
-            
+            /*var sb = new StringBuilder();
+            string[] n = text.Split(' ');
+            foreach (var word in n){
+                sb.Append(word);
+            }
+            var num = sb.ToString();
+            Console.WriteLine(num);*/
+            var array = text.Split(' ').ToArray();
+            var sb = new StringBuilder();
+            foreach (var word in array) {
+                sb.Append(word);
+                sb.Append(' ');
+            }
+            Console.WriteLine(sb);
         }
     }
 }
