@@ -26,24 +26,14 @@ namespace Exercise03 {
         }
 
         private static void Exercise3_1(string text) {
-            var str1 = Console.ReadLine();
-            var str2 = Console.ReadLine();
-
-            if (string.Compare(str1,str2,true) == 0) //ignoreCaseを使ってもok
-                Console.WriteLine("文字列が等しい");
-             else 
-                Console.WriteLine("文字列が等しくない");
+            //var cnt = text.Count(s => s == "");
+            var cnt = text.Count(c => c == ' ');
+            Console.WriteLine("空白数:{0}",cnt);
         }
 
         private static void Exercise3_2(string text) {
-            var line = Console.ReadLine();
-            int num;
-            if(int.TryParse(line, out num)) {
-                //Console.WriteLine("{0:#,#}",num);
-                Console.WriteLine($"{num:#,#}");
-            } else {
-                Console.WriteLine("数字文字列ではありません");
-            }
+            var replaced = text.Replace("big", "small");
+            Console.WriteLine(replaced);
         }
 
         private static void Exercise3_3(string text) {
