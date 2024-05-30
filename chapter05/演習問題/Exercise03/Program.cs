@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,14 +36,19 @@ namespace Exercise03 {
         }
 
         private static void Exercise3_2(string text) {
-            var num = Console.ReadLine();
-            
-
-            
+            var line = Console.ReadLine();
+            int num;
+            if(int.TryParse(line, out num)) {
+                //Console.WriteLine("{0:#,#}",num);
+                Console.WriteLine($"{num:#,#}");
+            } else {
+                Console.WriteLine("数字文字列ではありません");
+            }
         }
 
         private static void Exercise3_3(string text) {
             
+
         }
 
         private static void Exercise3_4(string text) {
