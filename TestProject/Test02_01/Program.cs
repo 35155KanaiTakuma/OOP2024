@@ -80,7 +80,7 @@ namespace Test02 {
         //問題３　偶数のみを昇順に並べて表示（遅延実行とする）
         private static void Exercise03(List<int> numbers) {
             var s = numbers.Where(n => n % 2 == 0);
-            // var guusu = s.OrderBy();
+
 
         }
 
