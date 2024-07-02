@@ -18,9 +18,9 @@ namespace Test01 {
             foreach (var line in lines) {
                 var items = line.Split(',');
                 var student = new Student {
-                    StudentName = items[0],
-                    kamoku = items[1],
-                    tensu = int.Parse(items[2])
+                    Name = items[0],
+                    Subject = items[1],
+                    Score = int.Parse(items[2])
                 };
                 students.Add(student);
             }
@@ -32,10 +32,10 @@ namespace Test01 {
         public IDictionary<string, int> GetPerStudentScore() {
             var dict = new Dictionary<string, int>();
             foreach (var score in _score) {
-                if (dict.ContainsKey(score.kamoku)) {
-                    dict[score.kamoku] += score.tensu;
+                if (dict.ContainsKey(score.Name)) {
+                    dict[score.Name] += score.Score;
                 } else {
-                    dict[score.kamoku] = score.tensu;
+                    dict[score.Name] = score.Score;
                 }
             }
             return dict;
