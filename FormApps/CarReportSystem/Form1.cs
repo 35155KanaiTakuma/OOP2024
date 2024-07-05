@@ -152,7 +152,7 @@ namespace CarReportSystem {
         }
 
         private void dgvCarReport_Click(object sender, EventArgs e) {
-            if (dgvCarReport.Rows.Count == 0) return;
+            if ((dgvCarReport.Rows.Count == 0) || (!dgvCarReport.CurrentRow.Selected)) return; ;
 
             dtpDate.Value = (DateTime)dgvCarReport.CurrentRow.Cells["Date"].Value;
             cbAuthor.Text = (string)dgvCarReport.CurrentRow.Cells["Author"].Value;
@@ -165,34 +165,35 @@ namespace CarReportSystem {
 
         // 削除
         private void btDeleteReport_Click(object sender, EventArgs e) {
-            if (listCarReports.Count == 0) {
+            if ((dgvCarReport.CurrentRow == null) 
+                || (!dgvCarReport.CurrentRow.Selected)) return;
+            /*if (listCarReports.Count == 0) {
                 tslbMessage.Text = "リストに何も登録されていません";
                 return;
-            }
+            }*/
             listCarReports.RemoveAt(dgvCarReport.CurrentRow.Index);
-            dgvCarReport.ClearSelection();
+            dgvCarReport.ClearSelection(); // セレクションを外す
         }
 
         // 修正
         private void btModifyReport_Click(object sender, EventArgs e) {
-            //if(dgvCarReport.CurrentRow == null) return;
+            if ((dgvCarReport.CurrentRow == null) 
+                || (!dgvCarReport.CurrentRow.Selected)) return;
 
-            if (listCarReports.Count == 0) {
-                tslbMessage.Text = "リストに何も登録されていません";
+            if (cbAuthor.Text == "" || cbCarName.Text == "") {
+                tslbMessage.Text = "記録者、または車名が未入力です";
                 return;
             }
+                /*if (listCarReports.Count == 0) {
+                    tslbMessage.Text = "リストに何も登録されていません";
+                    return;
+                }
 
+                if (cbAuthor.Text == "" || cbCarName.Text == "") {
+                    tslbMessage.Text = "記録者、または車名が未入力です";
+                    return;
+                }*/
 
-            /*     こっちでも修正出来る    
-            var modifyData = listCarReports.[dgvCarReport.CurrentRow.Index];
-
-            modifyData = new CarReport {
-                Date = dtpDate.Value,
-                Author = cbAuthor.Text,
-                Maker = GetRadioButtonMaker(),
-                Report = tbReport.Text,
-                Picture = pbPicture.Image,
-            }; */
 
             listCarReports[dgvCarReport.CurrentRow.Index].Date = dtpDate.Value;
             listCarReports[dgvCarReport.CurrentRow.Index].Author = cbAuthor.Text;
@@ -200,22 +201,19 @@ namespace CarReportSystem {
             listCarReports[dgvCarReport.CurrentRow.Index].Maker = GetRadioButtonMaker();
             listCarReports[dgvCarReport.CurrentRow.Index].Report = tbReport.Text;
             listCarReports[dgvCarReport.CurrentRow.Index].Picture = pbPicture.Image;
+            /*     こっちでも修正出来る    
+            var modifyData = listCarReports.[dgvCarReport.CurrentRow.Index];
 
-
-
-            /*CarReport carReport = new CarReport {
-                Date = dgvCarReport.,
-                Author = cbAuthor.Text,
-                Maker = GetRadioButtonMaker(),
-                CarName = cbCarName.Text,
-                Report = tbReport.Text,
-                Picture = pbPicture.Image,
-            };
-            listCarReports.
-            listCarReports.RemoveAt(dgvCarReport.CurrentRow.Index);*/
-
+            modifyData = new CarReport {
+            Date = dtpDate.Value,
+            Author = cbAuthor.Text,
+            Maker = GetRadioButtonMaker(),
+            Report = tbReport.Text,
+            Picture = pbPicture.Image,
+            }; */
 
             dgvCarReport.Refresh(); // データグリッドビューの更新
+            
         }
 
         // 記録者のテキストが修正されたら
