@@ -1,6 +1,8 @@
+using CarReportSystem.Properties;
 using System.ComponentModel;
 using System.Data;
 using System.DirectoryServices;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 
@@ -165,7 +167,7 @@ namespace CarReportSystem {
 
         // 削除
         private void btDeleteReport_Click(object sender, EventArgs e) {
-            if ((dgvCarReport.CurrentRow == null) 
+            if ((dgvCarReport.CurrentRow == null)
                 || (!dgvCarReport.CurrentRow.Selected)) return;
             /*if (listCarReports.Count == 0) {
                 tslbMessage.Text = "リストに何も登録されていません";
@@ -177,22 +179,22 @@ namespace CarReportSystem {
 
         // 修正
         private void btModifyReport_Click(object sender, EventArgs e) {
-            if ((dgvCarReport.CurrentRow == null) 
+            if ((dgvCarReport.CurrentRow == null)
                 || (!dgvCarReport.CurrentRow.Selected)) return;
 
             if (cbAuthor.Text == "" || cbCarName.Text == "") {
                 tslbMessage.Text = "記録者、または車名が未入力です";
                 return;
             }
-                /*if (listCarReports.Count == 0) {
-                    tslbMessage.Text = "リストに何も登録されていません";
-                    return;
-                }
+            /*if (listCarReports.Count == 0) {
+                tslbMessage.Text = "リストに何も登録されていません";
+                return;
+            }
 
-                if (cbAuthor.Text == "" || cbCarName.Text == "") {
-                    tslbMessage.Text = "記録者、または車名が未入力です";
-                    return;
-                }*/
+            if (cbAuthor.Text == "" || cbCarName.Text == "") {
+                tslbMessage.Text = "記録者、または車名が未入力です";
+                return;
+            }*/
 
 
             listCarReports[dgvCarReport.CurrentRow.Index].Date = dtpDate.Value;
@@ -213,17 +215,58 @@ namespace CarReportSystem {
             }; */
 
             dgvCarReport.Refresh(); // データグリッドビューの更新
-            
+
         }
 
-        // 記録者のテキストが修正されたら
+        // 記録者のテキストが編集されたら
         private void cbAuthor_TextChanged(object sender, EventArgs e) {
             tslbMessage.Text = "";
         }
 
-        // 車名のテキストが修正されたら
+        // 車名のテキストが編集されたら
         private void cbCarName_TextChanged(object sender, EventArgs e) {
             tslbMessage.Text = "";
+        }
+
+        // 保存ボタン
+        private void btReportSave_Click(object sender, EventArgs e) {
+            if (sfdReportFileSave.ShowDialog() == DialogResult.OK) {
+                try {
+                    // バイナリ形式でシリアル化
+#pragma warning disable SYSLIB0011 // 型またはメンバーが旧型式です
+                    var bf = new BinaryFormatter();
+#pragma warning restore SYSLIB0011 // 型またはメンバーが旧型式です
+                    using (FileStream fs = File.Open(
+                        sfdReportFileSave.FileName, FileMode.Create)) {
+                        bf.Serialize(fs, listCarReports);
+                    }
+                }
+                catch (Exception) {
+
+                    throw;
+                }
+            }
+        }
+
+        private void btReportOpen_Click(object sender, EventArgs e) {
+            if (ofdPicFileOpen.ShowDialog() == DialogResult.OK) {
+                try {
+                    // 逆シリアル化でバイナリ形式を取り込む
+#pragma warning disable SYSLIB0011 // 型またはメンバーが旧型式です
+                    var bf = new BinaryFormatter();
+#pragma warning restore SYSLIB0011 // 型またはメンバーが旧型式です
+                    using (FileStream fs
+                        = File.Open(ofdPicFileOpen.FileName, FileMode.Open, FileAccess.Read)) {
+
+                        listCarReports = (BindingList<CarReport>)bf.Deserialize(fs);
+                        dgvCarReport.DataSource = listCarReports;
+                    }
+                }
+                catch (Exception) {
+
+                    throw;
+                }
+            }
         }
     }
 }
