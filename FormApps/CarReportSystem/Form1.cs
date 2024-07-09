@@ -48,7 +48,7 @@ namespace CarReportSystem {
 
             setCbAuthor(cbAuthor.Text);
 
-            GetRadioButtonMaker(cbCarName.Text);
+            setCbCarName(cbCarName.Text);
 
             dgvCarReport.ClearSelection(); // セレクションを外す
 
@@ -90,7 +90,7 @@ namespace CarReportSystem {
         }
 
         // 車名の履歴をコンボボックスへ登録（重複なし）
-        private void GetRadioButtonMaker(string carName) {
+        private void setCbCarName(string carName) {
             if (!cbCarName.Items.Contains(carName))
                 cbCarName.Items.Add(carName);
         }
@@ -140,19 +140,27 @@ namespace CarReportSystem {
             }
         }
 
+        // 画像選択
         private void btPicOpen_Click(object sender, EventArgs e) {
             if (ofdPicFileOpen.ShowDialog() == DialogResult.OK)
                 pbPicture.Image = Image.FromFile(ofdPicFileOpen.FileName);
         }
 
+        // 画像削除
         private void btPicDelete_Click(object sender, EventArgs e) {
             pbPicture.Image = null;
         }
 
+
         private void Form1_Load(object sender, EventArgs e) {
             dgvCarReport.Columns["Picture"].Visible = false;  //画像表示しない
+
+            // 交互に色を設定する（データグリッドビュー）
+            dgvCarReport.RowsDefaultCellStyle.BackColor = Color.AliceBlue;
+            dgvCarReport.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
         }
 
+        //　CarRePortリストに入力内容を保存
         private void dgvCarReport_Click(object sender, EventArgs e) {
             if ((dgvCarReport.Rows.Count == 0) || (!dgvCarReport.CurrentRow.Selected)) return; ;
 
@@ -228,8 +236,8 @@ namespace CarReportSystem {
             tslbMessage.Text = "";
         }
 
-        // 保存ボタン
-        private void btReportSave_Click(object sender, EventArgs e) {
+        // 保存
+        private void ReportSaveFile() {
             if (sfdReportFileSave.ShowDialog() == DialogResult.OK) {
                 try {
                     // バイナリ形式でシリアル化
@@ -242,13 +250,14 @@ namespace CarReportSystem {
                     }
                 }
                 catch (Exception) {
-
-                    throw;
+                    tslbMessage.Text = "書き込みエラー";
+                    return;
                 }
             }
         }
 
-        private void btReportOpen_Click(object sender, EventArgs e) {
+        // ファイルを開く
+        private void ReportOpenFile() {
             if (ofdPicFileOpen.ShowDialog() == DialogResult.OK) {
                 try {
                     // 逆シリアル化でバイナリ形式を取り込む
@@ -260,13 +269,42 @@ namespace CarReportSystem {
 
                         listCarReports = (BindingList<CarReport>)bf.Deserialize(fs);
                         dgvCarReport.DataSource = listCarReports;
+
+                        foreach (var carReport in listCarReports) {
+                            setCbAuthor(carReport.Author);
+                            setCbCarName(carReport.CarName);
+                        }
                     }
                 }
                 catch (Exception) {
-
-                    throw;
+                    tslbMessage.Text = "ファイル形式が違います";
+                    return;
+                    //MessageBox.Show(ex.Message);
                 }
+                dgvCarReport.ClearSelection();
             }
+        }
+
+        // クリアボタンが押されたら中身をすべて消す
+        private void CheckClear_Click(object sender, EventArgs e) {
+            inputitemsAllClear();
+            dgvCarReport.ClearSelection();
+        }
+
+        private void 開くToolStripMenuItem_Click(object sender, EventArgs e) {
+            ReportOpenFile();
+        }
+
+        private void 保存ToolStripMenuItem_Click(object sender, EventArgs e) {
+            ReportSaveFile();
+        }
+
+        private void 色の設定ToolStripMenuItem_Click(object sender, EventArgs e) {
+
+        }
+
+        private void 終了ToolStripMenuItem_Click(object sender, EventArgs e) {
+            Application.Exit();
         }
     }
 }
