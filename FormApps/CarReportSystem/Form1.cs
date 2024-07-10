@@ -95,7 +95,7 @@ namespace CarReportSystem {
                 cbCarName.Items.Add(carName);
         }
 
-        //選択されているメーカー名を列挙型で返す
+        // 選択されているメーカー名を列挙型で返す
         private CarReport.MakerGroup GetRadioButtonMaker() {
             if (rbToyota.Checked)
                 return CarReport.MakerGroup.トヨタ;
@@ -113,7 +113,7 @@ namespace CarReportSystem {
             return CarReport.MakerGroup.その他;
         }
        
-        //指定したメーカーのラジオボタンをセット
+        // 指定したメーカーのラジオボタンをセット
         private void setRadioButtonMaker(CarReport.MakerGroup targetMaker) {
 
             switch (targetMaker) {
