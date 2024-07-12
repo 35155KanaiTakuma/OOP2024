@@ -60,6 +60,7 @@
             保存ToolStripMenuItem = new ToolStripMenuItem();
             色の設定ToolStripMenuItem = new ToolStripMenuItem();
             終了ToolStripMenuItem = new ToolStripMenuItem();
+            cdColor = new ColorDialog();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbPicture).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvCarReport).BeginInit();
@@ -443,6 +444,7 @@
             MaximizeBox = false;
             Name = "Form1";
             Text = "試乗レポート管理システム";
+            FormClosed += Form1_FormClosed;
             Load += Form1_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
@@ -497,5 +499,6 @@
         private ToolStripMenuItem 保存ToolStripMenuItem;
         private ToolStripMenuItem 色の設定ToolStripMenuItem;
         private ToolStripMenuItem 終了ToolStripMenuItem;
+        private ColorDialog cdColor;
     }
 }
