@@ -17,7 +17,7 @@ namespace CarReportSystem {
         BindingList<CarReport> listCarReports = new BindingList<CarReport>();
 
         // 設定クラスのインスタンス作成
-        Settings settings = new Settings();
+        Settings settings = Settings.getInstance();
 
         //コンストラクタ
         public Form1() {
@@ -330,7 +330,7 @@ namespace CarReportSystem {
             if (cdColor.ShowDialog() == DialogResult.OK) {
                 BackColor = cdColor.Color;  // 背景色設定
                 settings.MainFormColor = cdColor.Color.ToArgb(); // 背景色保存
-                MessageBox.Show(settings.MainFormColor.ToString());
+                //MessageBox.Show(settings.MainFormColor.ToString());
             }
         }
 
