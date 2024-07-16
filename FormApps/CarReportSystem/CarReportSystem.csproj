@@ -6,6 +6,9 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Title>CarReportSystem</Title>
+    <AssemblyVersion>1.0.1.0</AssemblyVersion>
+    <Authors>金井琢磨</Authors>
   </PropertyGroup>
 
   <ItemGroup>

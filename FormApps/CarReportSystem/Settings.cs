@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 namespace CarReportSystem {
     public class Settings {
 
-        private static Settings instance; // 自分自身のインスタンスを格納
+        private static Settings? instance; // 自分自身のインスタンスを格納
 
         public int MainFormColor { get; set; }
 
-        // コンストラクタ
+        // コンストラクタ(privateにすることによりnewできなくなる)
         private Settings() { }
 
-        // インスタンスを返却するメソッドで
+        // インスタンスを返却するメソッド
         public static Settings getInstance() { 
             if(instance == null) {
                 instance = new Settings();
@@ -22,6 +22,5 @@ namespace CarReportSystem {
             }
             return instance;
         }
-
     }
 }
