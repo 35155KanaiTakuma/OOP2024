@@ -26,7 +26,7 @@ namespace CarReportSystem {
 
             VersionNow.Text = "Ver" + varsion.Major.ToString() + "." + varsion.Minor.ToString() + "." +
                 varsion.Build.ToString() + "." + varsion.Revision.ToString();
-
+            var name = asm.GetName();
 
         }
 
