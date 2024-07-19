@@ -79,19 +79,37 @@ namespace Exercise01 {
         }
 
         private static void Exercise1_4(string file, string newfile) {
-            var element = new XElement("file",
-                new XElement("name", "サッカー", new XAttribute("kanji", "蹴球")),
-                new XElement("teammembers", "15"),
-                new XElement("firstplayed", "1863")
-                );
+            int n = 1;
             var xdoc = XDocument.Load(file);
-            xdoc.Root.Add(element);
+            while (n == 1) { 
+                Console.Write("名称：");
+                var sport_name = Console.ReadLine();
+                Console.Write("漢字：");
+                var sport_kanji = Console.ReadLine();
+                Console.Write("人数：");
+                var sport_member = Console.ReadLine();
+                Console.Write("起源：");
+                var sport_firstplayed = Console.ReadLine();
 
-            foreach (var sport in xdoc.Root.Elements()) {
-                var xname = sport.Element("name").Value;
-                var xteammembers = sport.Element("teammembers").Value;
-                var xfirstplayed = sport.Element("firstplayed").Value;
-                Console.WriteLine("{0} {1} {2}", xname, xteammembers, xfirstplayed);
+                var element = new XElement("file",
+                    new XElement("name", sport_name, new XAttribute("kanji", sport_kanji)),
+                    new XElement("teammembers", sport_member),
+                    new XElement("firstplayed", sport_firstplayed)
+                    );
+                // 追加
+                xdoc.Root.Add(element);
+                // 保存
+                xdoc.Save("newXmlFile.xml");
+                Console.WriteLine("追加：1");
+                Console.WriteLine("保存：2");
+                n = int.Parse(Console.ReadLine());
+                // 確認用
+                /*foreach (var sport in xdoc.Root.Elements()) {
+                    var xname = sport.Element("name").Value;
+                    var xteammembers = sport.Element("teammembers").Value;
+                    var xfirstplayed = sport.Element("firstplayed").Value;
+                    Console.WriteLine("{0} {1} {2}", xname, xteammembers, xfirstplayed);
+                }*/
             }
         }
     }
