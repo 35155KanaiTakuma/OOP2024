@@ -79,38 +79,41 @@ namespace Exercise01 {
         }
 
         private static void Exercise1_4(string file, string newfile) {
-            int n = 1;
+            List<XElement> xElements = new List<XElement>();
+
             var xdoc = XDocument.Load(file);
-            while (n == 1) { 
-                Console.Write("名称：");
-                var sport_name = Console.ReadLine();
-                Console.Write("漢字：");
-                var sport_kanji = Console.ReadLine();
-                Console.Write("人数：");
-                var sport_member = Console.ReadLine();
-                Console.Write("起源：");
-                var sport_firstplayed = Console.ReadLine();
+            string name, kanji, teammembers, firstplayed;
+            int nextFlag;
+            while (true) {
+                Console.Write("名称："); name = Console.ReadLine();
+                Console.Write("漢字："); kanji = Console.ReadLine();
+                Console.Write("人数："); teammembers = Console.ReadLine();
+                Console.Write("起源："); firstplayed = Console.ReadLine();
 
                 var element = new XElement("file",
-                    new XElement("name", sport_name, new XAttribute("kanji", sport_kanji)),
-                    new XElement("teammembers", sport_member),
-                    new XElement("firstplayed", sport_firstplayed)
+                    new XElement("name", name, new XAttribute("kanji", kanji)),
+                    new XElement("teammembers", teammembers),
+                    new XElement("firstplayed", firstplayed)
                     );
-                // 追加
-                xdoc.Root.Add(element);
-                // 保存
-                xdoc.Save("newXmlFile.xml");
-                Console.WriteLine("追加：1");
-                Console.WriteLine("保存：2");
-                n = int.Parse(Console.ReadLine());
-                // 確認用
-                /*foreach (var sport in xdoc.Root.Elements()) {
-                    var xname = sport.Element("name").Value;
-                    var xteammembers = sport.Element("teammembers").Value;
-                    var xfirstplayed = sport.Element("firstplayed").Value;
-                    Console.WriteLine("{0} {1} {2}", xname, xteammembers, xfirstplayed);
-                }*/
+                xElements.Add(element);// リストに要素を追加
+                Console.WriteLine();    //改行
+                Console.Write("追加【1】保存【２】");
+                Console.Write(">");
+                nextFlag = int.Parse(Console.ReadLine());
+                if (nextFlag == 2) break;  //無限ループを抜ける
+                Console.WriteLine();    //改行
             }
+            xdoc.Root.Add(xElements);
+            xdoc.Save(newfile); //保存
+
+            // 確認用
+            /*foreach (var sport in xdoc.Root.Elements()) {
+                var xname = sport.Element("name").Value;
+                var xteammembers = sport.Element("teammembers").Value;
+                var xfirstplayed = sport.Element("firstplayed").Value;
+                Console.WriteLine("{0} {1} {2}", xname, xteammembers, xfirstplayed);
+            }*/
         }
     }
 }
+
