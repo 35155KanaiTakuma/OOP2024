@@ -106,6 +106,7 @@
             cbAuthor.Name = "cbAuthor";
             cbAuthor.Size = new Size(302, 33);
             cbAuthor.TabIndex = 2;
+            cbAuthor.SelectedIndexChanged += cbAuthor_SelectedIndexChanged;
             cbAuthor.TextChanged += cbAuthor_TextChanged;
             // 
             // label3
@@ -425,7 +426,7 @@
             // このアプリについてToolStripMenuItem
             // 
             このアプリについてToolStripMenuItem.Name = "このアプリについてToolStripMenuItem";
-            このアプリについてToolStripMenuItem.Size = new Size(180, 22);
+            このアプリについてToolStripMenuItem.Size = new Size(167, 22);
             このアプリについてToolStripMenuItem.Text = "このアプリについて....";
             このアプリについてToolStripMenuItem.Click += このアプリについてToolStripMenuItem_Click;
             // 
