@@ -106,7 +106,6 @@
             cbAuthor.Name = "cbAuthor";
             cbAuthor.Size = new Size(302, 33);
             cbAuthor.TabIndex = 2;
-            cbAuthor.SelectedIndexChanged += cbAuthor_SelectedIndexChanged;
             cbAuthor.TextChanged += cbAuthor_TextChanged;
             // 
             // label3

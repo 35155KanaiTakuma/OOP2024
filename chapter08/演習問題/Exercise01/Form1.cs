@@ -45,8 +45,8 @@ namespace Exercise01 {
             
         }
 
-        public static DateTime NextDay(DateTime date,DayOfWeek dayOfWeek) {
+        /*public static DateTime NextDay(DateTime date,DayOfWeek dayOfWeek) {
             var days = (int)dayOfWeek - (int)(date.DayOfWeek);
-        }
+        }*/
     }
 }
