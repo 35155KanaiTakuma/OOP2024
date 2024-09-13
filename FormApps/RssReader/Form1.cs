@@ -41,7 +41,7 @@ namespace RssReader {
         }
 
         private void lbRssTitle_SelectedIndexChanged(object sender, EventArgs e) {
-            webView2_1.CoreWebView2.Navigate("Link");
+            //webView2_1.CoreWebView2.NavigateToString(items.Link);
         }
 
         private void btclean_Click(object sender, EventArgs e) {

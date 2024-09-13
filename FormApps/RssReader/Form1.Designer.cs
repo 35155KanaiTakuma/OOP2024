@@ -66,6 +66,7 @@
             this.webView2_1.Location = new System.Drawing.Point(12, 134);
             this.webView2_1.Name = "webView2_1";
             this.webView2_1.Size = new System.Drawing.Size(756, 497);
+            this.webView2_1.Source = new System.Uri("https://news.yahoo.co.jp/rss", System.UriKind.Absolute);
             this.webView2_1.TabIndex = 4;
             this.webView2_1.ZoomFactor = 1D;
             // 
