@@ -14,6 +14,16 @@ namespace SampleEntityFramework {
             foreach (var book in data) {
                 Console.WriteLine(book.Title);
             }*/
+            Console.WriteLine();
+            DisplayAllBooks3();
+            Console.WriteLine("# 1-3");
+            Console.WriteLine();
+            DisplayAllBooks4();
+            Console.WriteLine("# 1-4");
+            Console.WriteLine();
+            DisplayAllBooks5();
+            Console.WriteLine("# 1-5");
+
 
             //AddAuthors();
             //AddBooks();
@@ -21,6 +31,7 @@ namespace SampleEntityFramework {
             //UpdateBook();
             //DeleteBook();
         }
+
 
         static void DisplayAllBooks() {
             var books = GetBooks();
@@ -30,16 +41,6 @@ namespace SampleEntityFramework {
             Console.ReadLine();
         }
 
-        static void DisplayAllBooks2() {
-            using (var db = new BooksDbContext()) {
-                foreach (var book in db.Books.ToList()) { 
-                    Console.WriteLine("{0},{1},{2}({3:yyyy/MM/dd})",
-                        book.Title, book.PublishedYear,
-                        book.Author, book.Author.Birthday
-                        );
-                }
-            }
-        }
 
         static void InsertBooks() {
             using (var db = new BooksDbContext()) {
@@ -171,6 +172,57 @@ namespace SampleEntityFramework {
                     //.Where(b => b.PublishedYear > 1900)
                     //.Include(nameof(Author))
                     .ToList();
+            }
+        }
+
+        //13.1.2
+        static void DisplayAllBooks2() {
+            using (var db = new BooksDbContext()) {
+                foreach (var book in db.Books.ToList()) {
+                    Console.WriteLine("{0},{1},{2}({3:yyyy/MM/dd})",
+                        book.Title, book.PublishedYear,
+                        book.Author, book.Author.Birthday
+                        );
+                }
+            }
+        }
+
+        //13.1.3
+        static void DisplayAllBooks3() {
+            using (var db = new BooksDbContext()) {
+                var title = db.Books.Where(a => a.Title.Length == db.Books.Max(x => x.Title.Length));
+
+                foreach(var item in title) {
+                    Console.WriteLine(item.Title);
+                }
+            }
+        }
+
+        static void DisplayAllBooks4(){
+            using (var db = new BooksDbContext()) {
+                var books = db.Books.OrderBy(a => a.PublishedYear)
+                             .Include(nameof(Author))
+                             .Take(3);
+
+                foreach (var book in books) {
+                    Console.WriteLine("{0} {1} {2}",
+                        book.Title, book.PublishedYear, book.Author.Name
+                        );
+                }
+            }
+        }
+
+        static void DisplayAllBooks5() {
+            using (var db = new BooksDbContext()) {
+                var authors = db.Authors.OrderByDescending(a => a.Birthday).ToList();
+                foreach (var author in authors) {
+                    Console.WriteLine("{0}",author.Name);
+                    foreach(var book in author.Books) {
+                        Console.WriteLine("{0} {1}",book.Title,book.PublishedYear);
+                    }
+                }
+                           
+                           
             }
         }
     }
